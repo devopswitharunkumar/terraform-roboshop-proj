@@ -1,0 +1,161 @@
+[ root@ip-172-31-31-43 /home/ec2-user ]# cat openvpn.sh
+#!/bin/bash
+
+LOG_FILE="/var/log/openvpn-install.log"
+
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+set -ex
+
+echo "========== OpenVPN Installation Started: $(date) =========="
+
+# Non-interactive / headless installation
+
+export AUTO_INSTALL=y
+
+# AWS EC2 public IP
+export ENDPOINT=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+
+export APPROVE_INSTALL=y
+export APPROVE_IP=y
+
+# Server endpoint IP version: IPv4
+export IPV6_SUPPORT=n
+
+# VPN clients: IPv4 only
+export CLIENT_IPV6=n
+
+# VPN subnet: Default 10.8.0.0/24
+export IPV4_SUBNET_CHOICE=1
+
+# Port: Default 1194
+export PORT_CHOICE=1
+
+# Protocol: TCP
+export PROTOCOL=tcp
+
+# DNS: Current system resolvers
+export DNS=adguard
+
+# Do not allow same profile on multiple devices
+export MULTI_CLIENT=n
+
+# Default MTU 1500
+export MTU_CHOICE=1
+
+# Authentication mode: PKI
+export AUTH_MODE=pki
+
+# Compression disabled
+export COMPRESSION_ENABLED=n
+
+# Use default encryption settings
+export CUSTOMIZE_ENC=n
+
+# Client name
+export CLIENT=arunvpn
+
+# Client certificate validity: 3650 days
+export CLIENT_CERT_DURATION_DAYS=3650
+
+# Passwordless client profile
+export PASS=1
+
+echo "Before download..."
+
+curl -fO https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+
+chmod +x openvpn-install.sh
+
+./openvpn-install.sh install
+
+echo "========== OpenVPN Installation Completed: $(date) =========="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########sampl################################
+#!/bin/bash
+
+LOG_FILE="/var/log/openvpn-install.log"
+
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+set -ex
+
+echo "========== OpenVPN Installation Started: $(date) =========="
+
+# Non-interactive / headless installation
+
+export AUTO_INSTALL=y
+
+# AWS EC2 public IP
+export ENDPOINT=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+
+export APPROVE_INSTALL=y
+export APPROVE_IP=y
+
+# Server endpoint IP version: IPv4
+export IPV6_SUPPORT=n
+
+# VPN clients: IPv4 only
+export CLIENT_IPV6=n
+
+# VPN subnet: Default 10.8.0.0/24
+export IPV4_SUBNET_CHOICE=1
+
+# Port: Default 1194
+export PORT_CHOICE=1
+
+# Protocol: TCP
+export PROTOCOL=tcp
+
+# DNS: Current system resolvers
+export DNS=adguard
+
+# Do not allow same profile on multiple devices
+export MULTI_CLIENT=n
+
+# Default MTU 1500
+export MTU_CHOICE=1
+
+# Authentication mode: PKI
+export AUTH_MODE=pki
+
+# Compression disabled
+export COMPRESSION_ENABLED=n
+
+# Use default encryption settings
+export CUSTOMIZE_ENC=n
+
+# Client name
+export CLIENT=arunvpn
+
+# Client certificate validity: 3650 days
+export CLIENT_CERT_DURATION_DAYS=3650
+
+# Passwordless client profile
+export PASS=1
+
+echo "Before download..."
+
+curl -fO https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+
+chmod +x openvpn-install.sh
+
+./openvpn-install.sh install
+
+echo "========== OpenVPN Installation Completed: $(date) =========="
+
