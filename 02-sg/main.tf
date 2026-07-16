@@ -130,16 +130,16 @@ resource "aws_security_group_rule" "openvpn_rule_to_connect_to_private_ec2_s" {
   cidr_blocks = ["0.0.0.0/0"]
 }
 
-#extra i added
-resource "aws_security_group_rule" "vpn_egress" {
-  security_group_id = module.vpn.sg_id
-  type        = "egress"
-  from_port   = 0
-  to_port     = 0
-  protocol    = "-1"
-  cidr_blocks = ["0.0.0.0/0"]
-  description = "Allow VPN EC2 outbound internet access"
-}
+# #extra i added
+# resource "aws_security_group_rule" "vpn_egress" {
+#   security_group_id = module.vpn.sg_id
+#   type        = "egress"
+#   from_port   = 0
+#   to_port     = 0
+#   protocol    = "-1"
+#   cidr_blocks = ["0.0.0.0/0"]
+#   description = "Allow VPN EC2 outbound internet access"
+# }
 
 #mongodb rules
 #mongodb accepting connections from catalogue instance instead of ingress rules because ip address is dynamic u can use this way
