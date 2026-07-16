@@ -3,7 +3,7 @@ module "vpn" {
 
   name          = "${local.ec2_name}-vpn"
   ami           = data.aws_ami.redhat-9-ami-id.id
-  instance_type = "t3.small"
+  instance_type = "t3.micro"
 
   create_security_group = false
 
