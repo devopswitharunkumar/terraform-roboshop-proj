@@ -195,6 +195,16 @@ resource "aws_security_group_rule" "redis_accept_cart_traffic" {
   security_group_id = module.redis.sg_id 
 }
 
+
+resource "aws_security_group_rule" "redis_accept_vpn_traffic" {
+    source_security_group_id = module.vpn.sg_id
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = module.redis.sg_id
+}
+
 #mysql rules
 resource "aws_security_group_rule" "mysql_accept_shipping_traffic" {
     source_security_group_id = module.shipping.sg_id 
